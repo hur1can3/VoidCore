@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <PackageId>VoidCore.AspNet</PackageId>
-    <Title>VoidCore.AspNet</Title>
-    <Description>Configure an Asp.Net Core web application with enterprise SPA conventions.</Description>
-    <PackageTags>asp.net;aspnet;opinionated;spa;single page;logging;configuration;</PackageTags>
+    <PackageId>VoidCore.EntityFrameworkCore</PackageId>
+    <Title>VoidCore.EntityFrameworkCore</Title>
+    <Description>Add opinionated Entity Framework Core data access to an application.</Description>
+    <PackageTags>asp.net;aspnet;opinionated;entity framework;configuration;</PackageTags>
     <Authors>Jeff Schreiner and contributors</Authors>
     <Copyright>Copyright 2018-present Jeff Schreiner</Copyright>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
@@ -21,11 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-18618-05" PrivateAssets="all" />
-    <PackageReference Include="Nerdbank.GitVersioning" Version="2.3.151" PrivateAssets="all" />
-    <PackageReference Include="Serilog.Sinks.File" Version="4.0.0" />
-    <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Condition="'$(TargetFramework)' != 'netcoreapp3.0'" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0-preview.18572.1" Condition="'$(TargetFramework)' == 'netcoreapp3.0'" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63127-02" PrivateAssets="all" />
+    <PackageReference Include="Nerdbank.GitVersioning" Version="2.3.138" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>

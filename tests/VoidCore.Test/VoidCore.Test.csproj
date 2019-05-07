@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\VoidCore.Model\VoidCore.Model.csproj" />
+    <ProjectReference Include="..\..\src\VoidCore.EntityFramework\VoidCore.EntityFramework.csproj" />
     <ProjectReference Include="..\..\src\VoidCore.AspNet\VoidCore.AspNet.csproj" />
   </ItemGroup>
 </Project>
