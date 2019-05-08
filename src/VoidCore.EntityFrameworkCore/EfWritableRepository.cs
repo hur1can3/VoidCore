@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using VoidCore.Model.Data;
 using VoidCore.Model.Logging;
 
-namespace VoidCore.AspNet.Data
+namespace VoidCore.EntityFrameworkCore
 {
     /// <summary>
     /// A generic read/write repository. Optimized for Entity Framework Contexts. Adapted from https://github.com/dotnet-architecture/eShopOnWeb

@@ -20,14 +20,22 @@
     <None Include="..\..\LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)" CopyToPublishDirectory="Always" />
   </ItemGroup>
 
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0-preview.18572.1" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' != 'netcoreapp3.0'">
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" Condition="'$(TargetFramework)' != 'netcoreapp3.0'" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0-preview.18572.1" Condition="'$(TargetFramework)' == 'netcoreapp3.0'" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63127-02" PrivateAssets="all" />
     <PackageReference Include="Nerdbank.GitVersioning" Version="2.3.138" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\VoidCore.AspNet\VoidCore.AspNet.csproj" />
     <ProjectReference Include="..\VoidCore.Model\VoidCore.Model.csproj" />
     <ProjectReference Include="..\VoidCore.Domain\VoidCore.Domain.csproj" />
   </ItemGroup>

@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
 using VoidCore.Domain.Guards;
 
-namespace VoidCore.AspNet.Data
+namespace VoidCore.EntityFrameworkCore
 {
     /// <summary>
     /// Configuration for databases.

@@ -20,7 +20,11 @@
     <None Include="..\..\LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)" CopyToPublishDirectory="Always" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' != 'netcoreapp3.0'">
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-18618-05" PrivateAssets="all" />
     <PackageReference Include="Nerdbank.GitVersioning" Version="2.3.151" PrivateAssets="all" />

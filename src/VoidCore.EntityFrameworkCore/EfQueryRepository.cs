@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using VoidCore.Model.Logging;
 
-namespace VoidCore.AspNet.Data
+namespace VoidCore.EntityFrameworkCore
 {
     /// <summary>
     /// A generic read-only repository backed by a DbQuery instead of a DbSet of entities. Optimized for Entity Framework
