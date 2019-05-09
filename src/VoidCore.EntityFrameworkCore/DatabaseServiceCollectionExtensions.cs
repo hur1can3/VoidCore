@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Console;
 using VoidCore.Domain.Guards;
 
 namespace VoidCore.EntityFrameworkCore
@@ -29,15 +29,7 @@ namespace VoidCore.EntityFrameworkCore
 
                 if (environment.IsDevelopment())
                 {
-                    // TODO: .Net Core 3.0 will have a new way of doing this. Can ignore CS0618 warning for now.
-                    var consoleLoggerFactory = new LoggerFactory(new[]
-                    {
-                        new ConsoleLoggerProvider(
-                            (category, level) => category == DbLoggerCategory.Database.Command.Name && level == LogLevel.Information,
-                            false)
-                    });
-
-                    options.UseLoggerFactory(consoleLoggerFactory);
+                    options.ConfigureWarnings(c => c.Log((RelationalEventId.CommandExecuting, LogLevel.Information)));
                 }
             });
         }
