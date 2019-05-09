@@ -16,3 +16,5 @@ if (-not $IncludeRecommended) {
 
 dotnet tool install --global nbgv
 dotnet tool update --global nbgv
+dotnet tool install --global dotnet-ef
+dotnet tool update --global dotnet-ef
