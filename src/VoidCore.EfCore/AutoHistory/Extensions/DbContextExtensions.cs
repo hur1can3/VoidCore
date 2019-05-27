@@ -24,6 +24,12 @@ namespace VoidCore.Efcore.AutoHistory
             EnsureAutoHistory<AutoHistory>(context, () => new AutoHistory());
         }
 
+        /// <summary>
+        ///  Ensure all Changes in the Ef Core Change Graph are captured.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="createHistoryFactory"></param>
+        /// <typeparam name="TAutoHistory"></typeparam>
         public static void EnsureAutoHistory<TAutoHistory>(this DbContext context, Func<TAutoHistory> createHistoryFactory)
             where TAutoHistory : AutoHistory
         {

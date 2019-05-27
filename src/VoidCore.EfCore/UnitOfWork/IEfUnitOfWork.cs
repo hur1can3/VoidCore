@@ -30,7 +30,7 @@ namespace VoidCore.Efcore.UnitOfWork
         /// <typeparam name="TEntity">The type of the entity.</typeparam>
         /// <returns>An instance of type <see cref="EfWritableRepository{TEntity}"/> repository.</returns>
         EfWritableRepository<TEntity> GetWritableRepository<TEntity>(ILoggingStrategy loggingStrategy, bool hasCustomRepository = false) where TEntity : class;
-        
+
         /// <summary>
         /// Gets the specified readable repository for the <typeparamref name="TEntity"/>.
         /// </summary>
