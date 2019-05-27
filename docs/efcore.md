@@ -25,13 +25,7 @@ VoidCore.EfCore includes helpers for using Entity Framework Core with unit of wo
 `AutoHistory` will recording all the data changing history in one `Table` named `AutoHistories`, this table will recording data
 `UPDATE`, `DELETE` history.
 
-1. Install AutoHistory Package
-
-Run the following command in the `Package Manager Console` to install Microsoft.EntityFrameworkCore.AutoHistory
-
-`PM> Install-Package Microsoft.EntityFrameworkCore.AutoHistory`
-
-2. Enable AutoHistory
+1. Enable AutoHistory
 
 ```csharp
 public class BloggingContext : DbContext
@@ -51,14 +45,14 @@ public class BloggingContext : DbContext
 }
 ```
 
-3. Ensure AutoHistory in DbContext. This must be called before bloggingContext.SaveChanges() or bloggingContext.SaveChangesAsync().
+2. Ensure AutoHistory in DbContext. This must be called before bloggingContext.SaveChanges() or bloggingContext.SaveChangesAsync().
 
 ```csharp
 bloggingContext.EnsureAutoHistory()
 ```
 
 ### Use Custom AutoHistory Entity
-You can use a custom auto history entity by extending the Microsoft.EntityFrameworkCore.AutoHistory class.
+You can use a custom auto history entity by extending the VoidCore.EfCore.AutoHistory class.
 
 ```csharp
 class CustomAutoHistory : AutoHistory
@@ -101,30 +95,31 @@ public void ConfigureServices(IServiceCollection services)
 /// <summary>
 /// Represents all the tables, views and functions of the database.
 /// </summary>
-public interface IDomainUnitOfWork {
+public interface IDomainUnitOfWork 
+{
     IReadOnlyRepository<Blog> Blogs { get; }
 
     IWritableRepository<Post> Posts { get; }
 }
 
 public class DomainUnitOfWork : IDomainUnitOfWork
+{
+    private readonly IEfUnitOfWork _unitOfWork;
+    private ILoggingStrategy _loggingStrategy;
+    private readonly IDateTimeService _now;
+    private readonly ICurrentUserAccessor _currentUserAccessor;
+
+    public DomainUnitOfWork(IEfUnitOfWork unitOfWork, ILoggingStrategy loggingStrategy, IDateTimeService now, ICurrentUserAccessor currentUserAccessor)
     {
-        private readonly IEfUnitOfWork _unitOfWork;
-        private ILoggingStrategy _loggingStrategy;
-        private readonly IDateTimeService _now;
-        private readonly ICurrentUserAccessor _currentUserAccessor;
-
-        public DomainUnitOfWork(IEfUnitOfWork unitOfWork, ILoggingStrategy loggingStrategy, IDateTimeService now, ICurrentUserAccessor currentUserAccessor)
-        {
-            _unitOfWork = unitOfWork;
-            _loggingStrategy = loggingStrategy;
-            _now = now;
-            _currentUserAccessor = currentUserAccessor;
-        }
-        public IReadOnlyRepository<Blog> Blogs => _unitOfWork.GetWritableRepository<Blog>(loggingStrategy: _loggingStrategy);
-
-        public IWritableRepository<Post> Posts => _unitOfWork.GetWritableRepository<Post>(loggingStrategy: _loggingStrategy).AddSoftDeletability(_now,_currentUserAccessor).AddAuditability(_now, _currentUserAccessor);
+        _unitOfWork = unitOfWork;
+        _loggingStrategy = loggingStrategy;
+        _now = now;
+        _currentUserAccessor = currentUserAccessor;
     }
+    public IReadOnlyRepository<Blog> Blogs => _unitOfWork.GetWritableRepository<Blog>(loggingStrategy: _loggingStrategy);
+
+    public IWritableRepository<Post> Posts => _unitOfWork.GetWritableRepository<Post>(loggingStrategy: _loggingStrategy).AddSoftDeletability(_now,_currentUserAccessor).AddAuditability(_now, _currentUserAccessor);
+}
 
 private async Task<Post> GetPost(IDomainUnitOfWork uow, int byId, CancellationToken cancellationToken = default) 
 {
