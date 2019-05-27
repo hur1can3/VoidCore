@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageId>VoidCore.EfCore</PackageId>
+    <Title>VoidCore.EfCore</Title>
+    <Description>Configure an Entity Framework Core with Unit Of Work conventions.</Description>
+    <PackageTags>opinionated;unit of work;entity framework;logging;configuration;</PackageTags>
+    <Authors>Jeff Schreiner and contributors</Authors>
+    <Copyright>Copyright 2018-present Jeff Schreiner</Copyright>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <ReleaseNotes>See commits since last release.</ReleaseNotes>
+    <TargetFrameworks>netcoreapp2.1;netcoreapp2.2</TargetFrameworks>
+    <LangVersion>Latest</LangVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VoidCore.Model\VoidCore.Model.csproj" />
+    <ProjectReference Include="..\VoidCore.AspNet\VoidCore.AspNet.csproj" />
+
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.2.4" />
+  </ItemGroup>
+</Project>
